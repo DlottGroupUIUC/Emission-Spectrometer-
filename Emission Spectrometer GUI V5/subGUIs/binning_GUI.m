@@ -1113,7 +1113,7 @@ PMT_current=fiber_array*1e-6;
 avg_current=mean(PMT_current,1)';
 
 handles.radcal_figure=figure('Name','Calibration with Radiance Lamp',...
-    'Tag','radiance calibration figure','NumberTitle','off','units','normalized','outerposition',[0 0 1 1]);
+    'Tag','radiance calibration figure','NumberTitle','off','units','normalized','outerposition',[.25 .25 .75 .75]);
 
 %plot raw radiance in current
 handles.radcal_raw=subplot(2,1,1);plot(time,PMT_current);
@@ -1142,6 +1142,9 @@ set(get(handles.radcal_vector, 'xLabel'), 'String', 'wavelength (nm)');
 handles.main_GUI_data.main_data_table{1,15}=unit_conversion;
 
 handles.unit_conv=unit_conversion;
+
+pause(1);
+delete(handles.radcal_figure);
 
 guidata(hObject,handles);
 

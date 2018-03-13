@@ -22,7 +22,7 @@ function varargout = graybody_spectrum_analysis_GUI(varargin)
 
 % Edit the above text to modify the response to help graybody_spectrum_analysis_GUI
 
-% Last Modified by GUIDE v2.5 13-Mar-2018 11:52:39
+% Last Modified by GUIDE v2.5 13-Mar-2018 17:16:13
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -83,7 +83,7 @@ handles.selected_file_txt.String=main_GUI_data.file_list{file_idx};
 %%%Initialize Plots%%%
 %Generate data
 %import necessary data
-if sum(cellfun('isempty',main_GUI_data.main_data_table(1,[5,6,7,10,11,13])))==0;
+if sum(cellfun('isempty',main_GUI_data.main_data_table(1,[5,6,7,8,10,11,13])))==0;
     time=main_GUI_data.main_data_table{file_idx,5};
     radiance=main_GUI_data.main_data_table{file_idx,6};
     spectral_radiance=main_GUI_data.main_data_table{file_idx,7}(25,:);
@@ -99,9 +99,11 @@ else
     spectral_radiance=zeros(1,32);
     T=zeros(1e2);
     P=zeros(1e2);
+    model_SR=zeros(1,32);
 end
 
 %initialize plots with real data
+figure(handles.graybody_spectrum_analysis_GUI_bkg);
 handles.WL_sub=subplot('Position',[0.20,0.63 0.65 0.35]);handles.WL_plot=plot(wavelength,spectral_radiance,'or',wavelength,model_SR,'-k');
 handles.TP_sub=subplot('Position',[0.20 0.25 0.65 0.30]);
 yyaxis left; handles.TP_plot(1)=semilogx(time,T,'ok');ylabel('temperature (K)');ylim([0 7000]);
@@ -153,7 +155,7 @@ handles.wavelength=wavelength;
 guidata(hObject, handles);
 
 % UIWAIT makes graybody_spectrum_analysis_GUI wait for user response (see UIRESUME)
-% uiwait(handles.emission_processing_GUI_bkg);
+% uiwait(handles.graybody_spectrum_analysis_GUI_bkg);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -284,9 +286,9 @@ catch
 end
 
 
-% --- Executes when user attempts to close emission_processing_GUI_bkg.
-function emission_processing_GUI_bkg_CloseRequestFcn(hObject, eventdata, handles)
-% hObject    handle to emission_processing_GUI_bkg (see GCBO)
+% --- Executes when user attempts to close graybody_spectrum_analysis_GUI_bkg.
+function graybody_spectrum_analysis_GUI_bkg_CloseRequestFcn(hObject, eventdata, handles)
+% hObject    handle to graybody_spectrum_analysis_GUI_bkg (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -296,9 +298,9 @@ switch handles.decision
     case 1
         main_GUI=findobj('Tag','Emission_spectrometer_GUI');
         guidata(main_GUI,handles.main_GUI_data);
-        delete(handles.emission_processing_GUI_bkg);
+        delete(handles.graybody_spectrum_analysis_GUI_bkg);
     case 2
-        delete(handles.emission_processing_GUI_bkg);
+        delete(handles.graybody_spectrum_analysis_GUI_bkg);
     case 3
 end
 
@@ -379,7 +381,7 @@ guidata(hObject,handles);
 
 main_GUI=findobj('Tag','Emission_spectrometer_GUI');
 guidata(main_GUI,handles.main_GUI_data);
-delete(handles.graybody_spectrum_analysis_GUI);
+delete(handles.graybody_spectrum_analysis_GUI_bkg);
 
 
 
@@ -915,4 +917,4 @@ function pass_close_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 main_GUI=findobj('Tag','Emission_spectrometer_GUI');
 guidata(main_GUI,handles.main_GUI_data);
-delete(handles.graybody_spectrum_analysis_GUI);
+delete(handles.graybody_spectrum_analysis_GUI_bkg);

@@ -637,6 +637,11 @@ if check_load=='Yes'
     data_initial=load(fullfile(parent_p,r));
     data_block=data_initial.data_block;
     
+    %make sure r is long enough to read through data
+    while length(r)<17
+        r=strcat('spacer',r);
+    end
+    
     %Generate folder names
     PDV_p=[parent_p,'PDV\'];
     PMT_p=[parent_p,'PMT\'];
@@ -731,7 +736,7 @@ if check_load=='Yes'
         
         %Convert data to main table
         data_table(:,1)=data_block(:,1);
-        data_table(:,[5,8,9])=data_block(:,[2,3,4]);
+        data_table(:,[5,6,7,8,9])=data_block(:,[2,3,4,5,6]);
         
         %Generate file list and other relevant table data
         for q=1:size(data_block,1)
@@ -756,11 +761,25 @@ if check_load=='Yes'
                 central_table{q,6}='False';
             end
             
+            %Determine if radiance data exist
+            if isempty(data_block{q,6}) == 0
+                central_table{q,7}='True';
+            else
+                central_table{q,7}='False';
+            end
+            
             %Determine if Z data exist
             if isempty(data_block{q,3}) == 0
                 central_table{q,8}='True';
             else
                 central_table{q,8}='False';
+            end
+            
+            %Determine if graybody data exist
+            if isempty(data_block{q,3}) == 0
+                central_table{q,9}='True';
+            else
+                central_table{q,9}='False';
             end
             
             %Extend central table data out
@@ -776,7 +795,7 @@ if check_load=='Yes'
         
         %Convert data to main table
         data_table(:,1)=data_block(:,1);
-        data_table(:,[5,11,12,13,14])=data_block(:,[2,3,4,5,6]);
+        data_table(:,[5,6,7,8,10,11,12,13,14])=data_block(:,[2,3,4,5,6,7,8,9,10]);
         
         %Generate file list and other relevant table data
         for q=1:size(data_block,1)
@@ -799,6 +818,20 @@ if check_load=='Yes'
                 central_table{q,6}='True';
             else
                 central_table{q,6}='False';
+            end
+            
+            %Determine if radiance data exist
+            if isempty(data_block{q,6}) == 0
+                central_table{q,7}='True';
+            else
+                central_table{q,7}='False';
+            end
+            
+            %Determine if Z data exist
+            if isempty(data_block{q,8}) == 0
+                central_table{q,8}='True';
+            else
+                central_table{q,8}='False';
             end
             
             %Determine if graybody data exist
@@ -881,15 +914,6 @@ if check_load=='Yes'
 end
 
 guidata(hObject,handles);
-
-
-
-
-% --------------------------------------------------------------------
-function graybody_load_Callback(hObject, eventdata, handles)
-% hObject    handle to graybody_load (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
 
 % --------------------------------------------------------------------
@@ -995,7 +1019,7 @@ function Z_save_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 parent_p=handles.parent_p;file_list=handles.file_list;
 
-data_block=handles.main_data_table(:,[1,5,8,9]);
+data_block=handles.main_data_table(:,[1,5,6,7,8,9]);
 
 %make sure data block is large enough to load
 if size(data_block,2)<15
@@ -1024,7 +1048,7 @@ function gray_save_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 parent_p=handles.parent_p;file_list=handles.file_list;
 
-data_block=handles.main_data_table(:,[1,5,11,12,13,14]);
+data_block=handles.main_data_table(:,[1,5,6,7,8,10,11,12,13,14]);
 
 %make sure data block is large enough to load
 if size(data_block,2)<15

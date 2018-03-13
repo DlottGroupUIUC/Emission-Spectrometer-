@@ -120,10 +120,10 @@ for idx=0:length(file_list)-1
                 data(:,4*idx+1)=data_block{1,2};
                 
                 %temperature data
-                data(:,4*idx+2)=data_block{1,3};
+                data(:,4*idx+2)=data_block{1,5};
                 
                 %temperature error data
-                data(:,4*idx+3)=data_block{1,4};
+                data(:,4*idx+3)=data_block{1,6};
                 
                 
             else
@@ -132,10 +132,10 @@ for idx=0:length(file_list)-1
                 data=padconcatenation_v4(data,data_block{idx+1,2},2);
                 
                 %temperature data
-                data=padconcatenation_v4(data,data_block{idx+1,3},2);
+                data=padconcatenation_v4(data,data_block{idx+1,5},2);
                 
                 %temperature error data
-                data=padconcatenation_v4(data,data_block{idx+1,4},2);
+                data=padconcatenation_v4(data,data_block{idx+1,6},2);
                 
                 
             end
@@ -169,10 +169,10 @@ for idx=0:length(file_list)-1
                 data(:,4*idx+1)=data_block{1,2};
                 
                 %temperature data
-                data(:,4*idx+2)=data_block{1,3};
+                data(:,4*idx+2)=data_block{1,7};
                 
                 %temperature error data
-                data(:,4*idx+3)=data_block{1,4};
+                data(:,4*idx+3)=data_block{1,8};
                 
                 
             else
@@ -181,10 +181,10 @@ for idx=0:length(file_list)-1
                 data=padconcatenation_v4(data,data_block{idx+1,2},2);
                 
                 %temperature data
-                data=padconcatenation_v4(data,data_block{idx+1,3},2);
+                data=padconcatenation_v4(data,data_block{idx+1,7},2);
                 
                 %temperature error data
-                data=padconcatenation_v4(data,data_block{idx+1,4},2);
+                data=padconcatenation_v4(data,data_block{idx+1,8},2);
                 
                 
             end
@@ -218,10 +218,10 @@ for idx=0:length(file_list)-1
                 data(:,4*idx+1)=data_block{1,2};
                 
                 %temperature data
-                data(:,4*idx+2)=data_block{1,5};
+                data(:,4*idx+2)=data_block{1,9};
                 
                 %temperature error data
-                data(:,4*idx+3)=data_block{1,6};
+                data(:,4*idx+3)=data_block{1,10};
                 
                 
             else
@@ -230,10 +230,10 @@ for idx=0:length(file_list)-1
                 data=padconcatenation_v4(data,data_block{idx+1,2},2);
                 
                 %temperature data
-                data=padconcatenation_v4(data,data_block{idx+1,5},2);
+                data=padconcatenation_v4(data,data_block{idx+1,9},2);
                 
                 %temperature error data
-                data=padconcatenation_v4(data,data_block{idx+1,6},2);
+                data=padconcatenation_v4(data,data_block{idx+1,10},2);
                 
                 
             end
